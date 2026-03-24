@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Supermercado El Ahorro - Inicio</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <h1>Supermercado El Ahorro</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li><a href="registro.html">Registro</a></li>
+                <li><a href="ventas.html">Ventas (Admin)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section style="text-align:center; padding: 40px 10%;">
+            <h2 style="color:var(--verde); font-size: 2.5rem;">Calidad y Ahorro diario</h2>
+            <p>Lo mejor en frescura para tu hogar.</p>
+        </section>
+
+        <section style="background:#fff; padding:30px; margin: 0 10% 40px; border-radius:15px; border:2px dashed var(--verde); text-align: center;">
+            <h3>¿Quieres ver ofertas exclusivas?</h3>
+            <p>Regístrate para desbloquear el carrusel de descuentos especiales.</p>
+            <a href="registro.html" class="btn-agregar" style="text-decoration:none; display:inline-block; width:auto; padding:10px 30px; margin-top:10px;">Crear mi Cuenta</a>
+        </section>
+
+        <section style="padding: 20px 5%;">
+            <h2 style="text-align:center; color:var(--verde); margin-bottom:30px;">Explora nuestras Categorías</h2>
+            
+            <div class="grid-productos">
+                <article class="tarjeta-producto">
+                    <p style="font-size: 10px; color: #888;">CATEGORÍA: FRUTAS</p>
+                    <img src="images/productos/manzana.jpg" alt="Manzana">
+                    <h3>Manzana Roja</h3>
+                    <p class="precio">$3.50</p>
+                    <button class="btn-agregar" onclick="location.href='productos.html'">Ver en Catálogo</button>
+                </article>
+
+                <article class="tarjeta-producto">
+                    <p style="font-size: 10px; color: #888;">CATEGORÍA: VERDURAS</p>
+                    <img src="images/productos/zanahoria.jpg" alt="Zanahoria">
+                    <h3>Zanahoria (1kg)</h3>
+                    <p class="precio">$1.50</p>
+                    <button class="btn-agregar" onclick="location.href='productos.html'">Ver en Catálogo</button>
+                </article>
+
+                <article class="tarjeta-producto">
+                    <p style="font-size: 10px; color: #888;">CATEGORÍA: LÁCTEOS</p>
+                    <img src="images/productos/leche.jpg" alt="Leche">
+                    <h3>Leche Entera</h3>
+                    <p class="precio">$1.20</p>
+                    <button class="btn-agregar" onclick="location.href='productos.html'">Ver en Catálogo</button>
+                </article>
+
+                <article class="tarjeta-producto">
+                    <p style="font-size: 10px; color: #888;">CATEGORÍA: BEBIDAS</p>
+                    <img src="images/productos/jugo.jpg" alt="Jugo">
+                    <h3>Jugo de Naranja</h3>
+                    <p class="precio">$4.00</p>
+                    <button class="btn-agregar" onclick="location.href='productos.html'">Ver en Catálogo</button>
+                </article>
+
+                <article class="tarjeta-producto">
+                    <p style="font-size: 10px; color: #888;">CATEGORÍA: LIMPIEZA</p>
+                    <img src="images/productos/detergente.jpg" alt="Detergente">
+                    <h3>Detergente</h3>
+                    <p class="precio">$8.50</p>
+                    <button class="btn-agregar" onclick="location.href='productos.html'">Ver en Catálogo</button>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background:#333; color:white; text-align:center; padding:20px; margin-top:40px;">
+        <p>&copy; 2026 Supermercado El Ahorro</p>
+    </footer>
+</body>
+</html>

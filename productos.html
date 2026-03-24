@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Catálogo Completo - El Ahorro</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .seccion-tienda { display: flex; gap: 20px; padding: 20px 5%; }
+        .catalogo { flex: 3; }
+        .carrito { flex: 1; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); height: fit-content; position: sticky; top: 90px; }
+        .item-c { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .filtros-container { background: white; padding: 20px; text-align: center; margin: 10px 5%; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        select, input { padding: 8px; border-radius: 5px; border: 1px solid #ccc; margin: 5px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Supermercado El Ahorro</h1>
+        <nav><ul><li><a href="index.html">Inicio</a></li><li><a href="ventas.html">Ventas</a></li></ul></nav>
+    </header>
+    
+    <div class="filtros-container">
+        <label><strong>Categoría:</strong></label>
+        <select id="cat" onchange="filtrar()">
+            <option value="todos">Todas las categorías</option>
+            <option value="frutas">Frutas</option>
+            <option value="verduras">Verduras</option>
+            <option value="lacteos">Lácteos</option>
+            <option value="bebidas">Bebidas</option>
+            <option value="limpieza">Limpieza</option>
+        </select>
+        <label><strong> Precio Máx ($):</strong></label>
+        <input type="number" id="pre" oninput="filtrar()" placeholder="Ej: 10">
+    </div>
+
+    <div class="seccion-tienda">
+        <main class="catalogo grid-productos">
+            <div class="tarjeta-producto" data-cat="frutas" data-pre="3.50">
+                <img src="images/productos/manzana.jpg" alt="Manzana">
+                <h3>Manzana Roja</h3><p class="precio">$3.50</p>
+                <button class="btn-agregar" onclick="add('Manzana Roja', 3.50)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="frutas" data-pre="2.50">
+                <img src="images/productos/banano.jpg" alt="Banano">
+                <h3>Banano (1kg)</h3><p class="precio">$2.50</p>
+                <button class="btn-agregar" onclick="add('Banano', 2.50)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="frutas" data-pre="4.00">
+                <img src="images/productos/uva.jpg" alt="Uvas">
+                <h3>Uvas Verdes</h3><p class="precio">$4.00</p>
+                <button class="btn-agregar" onclick="add('Uvas Verdes', 4.00)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="frutas" data-pre="5.50">
+                <img src="images/productos/fresa.jpg" alt="Fresas">
+                <h3>Fresas (500g)</h3><p class="precio">$5.50</p>
+                <button class="btn-agregar" onclick="add('Fresas', 5.50)">Agregar</button>
+            </div>
+
+            <div class="tarjeta-producto" data-cat="verduras" data-pre="1.50">
+                <img src="images/productos/zanahoria.jpg" alt="Zanahoria">
+                <h3>Zanahoria</h3><p class="precio">$1.50</p>
+                <button class="btn-agregar" onclick="add('Zanahoria', 1.50)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="verduras" data-pre="2.20">
+                <img src="images/productos/cebolla.jpg" alt="Cebolla">
+                <h3>Cebolla Cabezona</h3><p class="precio">$2.20</p>
+                <button class="btn-agregar" onclick="add('Cebolla', 2.20)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="verduras" data-pre="3.00">
+                <img src="images/productos/tomate.jpg" alt="Tomate">
+                <h3>Tomate Chonto</h3><p class="precio">$3.00</p>
+                <button class="btn-agregar" onclick="add('Tomate', 3.00)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="verduras" data-pre="2.80">
+                <img src="images/productos/papa.jpg" alt="Papa">
+                <h3>Papa Sabanera</h3><p class="precio">$2.80</p>
+                <button class="btn-agregar" onclick="add('Papa', 2.80)">Agregar</button>
+            </div>
+
+            <div class="tarjeta-producto" data-cat="lacteos" data-pre="1.20">
+                <img src="images/productos/leche.jpg" alt="Leche">
+                <h3>Leche Entera</h3><p class="precio">$1.20</p>
+                <button class="btn-agregar" onclick="add('Leche', 1.20)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="lacteos" data-pre="4.50">
+                <img src="images/productos/queso.jpg" alt="Queso">
+                <h3>Queso Campesino</h3><p class="precio">$4.50</p>
+                <button class="btn-agregar" onclick="add('Queso', 4.50)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="lacteos" data-pre="2.50">
+                <img src="images/productos/yogurt.jpg" alt="Yogurt">
+                <h3>Yogurt Fresa</h3><p class="precio">$2.50</p>
+                <button class="btn-agregar" onclick="add('Yogurt', 2.50)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="lacteos" data-pre="3.80">
+                <img src="images/productos/mantequilla.jpg" alt="Mantequilla">
+                <h3>Mantequilla</h3><p class="precio">$3.80</p>
+                <button class="btn-agregar" onclick="add('Mantequilla', 3.80)">Agregar</button>
+            </div>
+
+            <div class="tarjeta-producto" data-cat="bebidas" data-pre="4.00">
+                <img src="images/productos/jugo.jpg" alt="Jugo">
+                <h3>Jugo Naranja</h3><p class="precio">$4.00</p>
+                <button class="btn-agregar" onclick="add('Jugo Naranja', 4.00)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="bebidas" data-pre="2.50">
+                <img src="images/productos/gaseosa.jpg" alt="Gaseosa">
+                <h3>Gaseosa 1.5L</h3><p class="precio">$2.50</p>
+                <button class="btn-agregar" onclick="add('Gaseosa', 2.50)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="bebidas" data-pre="1.00">
+                <img src="images/productos/agua.jpg" alt="Agua">
+                <h3>Agua Mineral</h3><p class="precio">$1.00</p>
+                <button class="btn-agregar" onclick="add('Agua', 1.00)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="bebidas" data-pre="6.00">
+                <img src="images/productos/cerveza.jpg" alt="Cerveza">
+                <h3>Six Pack Cerveza</h3><p class="precio">$6.00</p>
+                <button class="btn-agregar" onclick="add('Cerveza', 6.00)">Agregar</button>
+            </div>
+
+            <div class="tarjeta-producto" data-cat="limpieza" data-pre="8.50">
+                <img src="images/productos/detergente.jpg" alt="Detergente">
+                <h3>Detergente Polvo</h3><p class="precio">$8.50</p>
+                <button class="btn-agregar" onclick="add('Detergente', 8.50)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="limpieza" data-pre="3.20">
+                <img src="images/productos/cloro.jpg" alt="Cloro">
+                <h3>Limpia Pisos</h3><p class="precio">$3.20</p>
+                <button class="btn-agregar" onclick="add('Cloro', 3.20)">Agregar</button>
+            </div>
+            <div class="tarjeta-producto" data-cat="limpieza" data-pre="2.00">
+                <img src="images/productos/jabon.jpg" alt="Jabon">
+                <h3>Jabón de Trastes</h3><p class="precio">$2.00</p>
+                <button class="btn-agregar" onclick="add('Jabon Trastes', 2.00)">Agregar</button>
+            </article>
+            <div class="tarjeta-producto" data-cat="limpieza" data-pre="5.00">
+                <img src="images/productos/suavizante.jpg" alt="Suavizante">
+                <h3>Suavizante Telas</h3><p class="precio">$5.00</p>
+                <button class="btn-agregar" onclick="add('Suavizante', 5.00)">Agregar</button>
+            </div>
+        </main>
+
+        <aside class="carrito">
+            <h3 style="color:var(--verde); border-bottom:2px solid var(--naranja); padding-bottom:10px;">🛒 Mi Carrito</h3>
+            <div id="lista-c"><p style="color:#999; text-align:center; margin-top:20px;">El carrito está vacío</p></div>
+            <div style="font-weight:bold; margin-top:20px; text-align:right;">Total: $<span id="total">0.00</span></div>
+            <button class="btn-agregar" style="margin-top:20px; background:var(--verde);" onclick="finalizar()">Finalizar Compra</button>
+        </aside>
+    </div>
+
+    <script>
+        let car = []; let t = 0;
+        function add(n, p) { car.push({n, p}); t += p; render(); }
+        function render() {
+            let l = document.getElementById('lista-c');
+            l.innerHTML = car.length ? '' : '<p style="text-align:center;color:#999;margin-top:20px;">El carrito está vacío</p>';
+            car.forEach(i => l.innerHTML += `<div class="item-c"><span>${i.n}</span><span>$${i.p.toFixed(2)}</span></div>`);
+            document.getElementById('total').innerText = t.toFixed(2);
+        }
+        function filtrar() {
+            let c = document.getElementById('cat').value;
+            let p = parseFloat(document.getElementById('pre').value) || 999;
+            document.querySelectorAll('.tarjeta-producto').forEach(div => {
+                let divC = div.getAttribute('data-cat');
+                let divP = parseFloat(div.getAttribute('data-pre'));
+                div.style.display = (c=='todos' || c==divC) && (divP<=p) ? 'block' : 'none';
+            });
+        }
+        function finalizar() {
+            if(car.length) { alert("¡Pedido registrado con éxito!"); window.location.href="ventas.html"; }
+            else { alert("Agrega productos primero."); }
+        }
+    </script>
+</body>
+</html>
