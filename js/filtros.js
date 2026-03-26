@@ -1,9 +1,3 @@
-// ============================================================
-//  FILTRO DE PRODUCTOS EN TIEMPO REAL
-//  Persona 2 | Proyecto: Sitio Web Supermercado
-//  Archivo: /js/scripts.js  (agregar debajo del carrito)
-// ============================================================
-
 // ─────────────────────────────────────────────────────────────
 //  FILTRAR POR CATEGORÍA
 //  Muestra solo los productos que pertenecen a la categoría

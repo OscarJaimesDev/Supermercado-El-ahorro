@@ -1,9 +1,3 @@
-// ============================================================
-//  CARRITO DE COMPRAS
-//  Persona 2 | Proyecto: Sitio Web Supermercado
-//  Archivo: /js/scripts.js  (agregar debajo de las validaciones)
-// ============================================================
-
 // ─────────────────────────────────────────────────────────────
 //  ESTADO DEL CARRITO
 //  El carrito se guarda en un array de objetos en memoria.
