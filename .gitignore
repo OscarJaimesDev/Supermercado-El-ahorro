@@ -1,1 +1,7 @@
-/php/Conexion.php
+<?php
+$conn= new mysqli("localhost", "root", "", "supermercado");
+if ($conn->connect_error){
+    die("Error de conexión:".
+$conn->connect_error);
+}
+?>
