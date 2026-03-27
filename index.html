@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supermercado El Ahorro - Inicio</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
     <header>
@@ -15,13 +17,17 @@
         <nav>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
-                <li><a href="productos.html">Productos</a></li>
-                <li><a href="registro.html">Registro</a></li>
-                <li><a href="ventas.html">Ventas</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li id="link-registro"><a href="registro.html">Registro</a></li>
+        <li id="link-ventas" style="display:none">
+            <a href="ventas.php">Ventas</a>
+        </li>
             </ul>
+            <button id="btn-sesion">Iniciar sesión</button>
             <!-- Botón del carrito con contador -->
             <button id="btn-carrito">
-                🛒 <span id="carrito-contador" style="display:none">0</span>
+                <img src="images/cart.png" alt="Carrito" width="24">
+                 <span id="carrito-contador" style="display:none">0</span>
             </button>
         </nav>
     </header>
@@ -47,11 +53,14 @@
             <p>Lo mejor en frescura para tu hogar.</p>
         </section>
 
-        <section style="background:#fff; padding:30px; margin: 0 10% 40px; border-radius:15px; border:2px dashed var(--verde); text-align:center;">
+        <section
+            style="background:#fff; padding:30px; margin: 0 10% 40px; border-radius:15px; border:2px dashed var(--verde); text-align:center;">
             <h3>¿Quieres ver ofertas exclusivas?</h3>
             <p>Regístrate para desbloquear el carrusel de descuentos especiales.</p>
-            <a href="registro.html" class="btn-agregar" style="text-decoration:none; display:inline-block; width:auto; padding:10px 30px; margin-top:10px;">
-                Crear mi Cuenta
+            <!-- En index.html reemplazar el botón de la sección de ofertas -->
+            <a href="ofertas.php" class="btn-agregar"
+                style="text-decoration:none; display:inline-block; width:auto; padding:10px 30px; margin-top:10px;">
+                Ver mis ofertas exclusivas
             </a>
         </section>
 
@@ -60,12 +69,9 @@
 
             <div class="grid-productos">
 
-                <article class="tarjeta-producto"
-                    data-categoria="frutas"
-                    data-precio="3.50"
-                    data-nombre="manzana roja">
+                <article class="tarjeta-producto" data-categoria="frutas" data-precio="3.50" data-nombre="manzana roja">
                     <p style="font-size:10px; color:#888;">CATEGORÍA: FRUTAS</p>
-                    <img src="images/manzana.jpg" alt="Manzana">
+                    <img src="images/Productos/manzana.jpg" alt="Manzana">
                     <h3>Manzana Roja</h3>
                     <p class="precio">$3.50</p>
                     <button class="btn-agregar"
@@ -74,12 +80,9 @@
                     </button>
                 </article>
 
-                <article class="tarjeta-producto"
-                    data-categoria="verduras"
-                    data-precio="1.50"
-                    data-nombre="zanahoria">
+                <article class="tarjeta-producto" data-categoria="verduras" data-precio="1.50" data-nombre="zanahoria">
                     <p style="font-size:10px; color:#888;">CATEGORÍA: VERDURAS</p>
-                    <img src="images/zanahoria.jpg" alt="Zanahoria">
+                    <img src="images/Productos/zanahoria.jpg" alt="Zanahoria">
                     <h3>Zanahoria (1kg)</h3>
                     <p class="precio">$1.50</p>
                     <button class="btn-agregar"
@@ -88,12 +91,10 @@
                     </button>
                 </article>
 
-                <article class="tarjeta-producto"
-                    data-categoria="lacteos"
-                    data-precio="1.20"
+                <article class="tarjeta-producto" data-categoria="lacteos" data-precio="1.20"
                     data-nombre="leche entera">
                     <p style="font-size:10px; color:#888;">CATEGORÍA: LÁCTEOS</p>
-                    <img src="images/leche.jpg" alt="Leche">
+                    <img src="images/Productos/leche.jpg" alt="Leche">
                     <h3>Leche Entera</h3>
                     <p class="precio">$1.20</p>
                     <button class="btn-agregar"
@@ -102,12 +103,10 @@
                     </button>
                 </article>
 
-                <article class="tarjeta-producto"
-                    data-categoria="bebidas"
-                    data-precio="4.00"
+                <article class="tarjeta-producto" data-categoria="bebidas" data-precio="4.00"
                     data-nombre="jugo de naranja">
                     <p style="font-size:10px; color:#888;">CATEGORÍA: BEBIDAS</p>
-                    <img src="images/jugo.jfif" alt="Jugo">
+                    <img src="images/Productos/jugo.jfif" alt="Jugo">
                     <h3>Jugo de Naranja</h3>
                     <p class="precio">$4.00</p>
                     <button class="btn-agregar"
@@ -116,12 +115,9 @@
                     </button>
                 </article>
 
-                <article class="tarjeta-producto"
-                    data-categoria="granos"
-                    data-precio="8.50"
-                    data-nombre="arroz">
+                <article class="tarjeta-producto" data-categoria="granos" data-precio="8.50" data-nombre="arroz">
                     <p style="font-size:10px; color:#888;">CATEGORÍA: GRANOS</p>
-                    <img src="images/arroz.jpg" alt="Arroz">
+                    <img src="images/Productos/arroz.jpg" alt="Arroz">
                     <h3>Arroz 1kg</h3>
                     <p class="precio">$8.50</p>
                     <button class="btn-agregar"
@@ -143,4 +139,5 @@
     <script src="js/scripts.js"></script>
 
 </body>
+
 </html>

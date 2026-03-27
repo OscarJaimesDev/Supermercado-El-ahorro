@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Validaciones básicas del lado del servidor
     if (empty($nombre) || empty($apellido) || empty($email) || empty($password)) {
         echo json_encode(['exito' => false, 'mensaje' => 'Todos los campos son obligatorios.']);
-        exit;
+        exit; 
     }
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo json_encode(['exito' => false, 'mensaje' => 'El email no es valido.']);
