@@ -31,7 +31,7 @@ echo "<table border='1'>
 <th>Fecha</th>
 </tr>";
 
-while ($fila = $resultado->fetch_assoc()) {
+while($fila = $resultado->fetch_assoc()){
     echo "<tr>
     <td>{$fila['id_venta']}</td>
     <td>{$fila['nombre']}</td>
@@ -45,3 +45,4 @@ while ($fila = $resultado->fetch_assoc()) {
 }
 
 echo "</table>";
+?>

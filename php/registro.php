@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/conexion.php';
+require_once 'conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre    = trim($_POST['nombre']    ?? '');
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdo  = conectar();
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
-   try {
+    try {
         $stmt = $pdo->prepare("INSERT INTO usuarios 
             (nombre, apellido, email, telefono, contrasena) 
             VALUES (?, ?, ?, ?, ?)");
