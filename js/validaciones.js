@@ -7,9 +7,9 @@
  * @param {HTMLElement} campo   - El input que falló la validación.
  * @param {string}      mensaje - Texto del error a mostrar.
  */
-function mostrarError(campo, mensaje) {
+function mostrarError(campo, mensaje){
   const errorExistente = campo.parentElement.querySelector(".error-msg");
-  if (!errorExistente) {
+  if (!errorExistente){
     const span = document.createElement("span");
     span.className = "error-msg";
     span.textContent = mensaje;
