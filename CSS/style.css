@@ -1,12 +1,25 @@
-/* 1. VARIABLES DE COLOR Y CONFIGURACIÓN GLOBAL */
+/* ============================================================
+   ESTILOS GLOBALES - Supermercado El Ahorro
+   Persona 1 | Archivo: /css/style.css
+   ============================================================ */
+
+/* ─────────────────────────────────────────────────────────────
+   1. VARIABLES Y RESET
+   ───────────────────────────────────────────────────────────── */
 :root {
-    --verde-primario: #2E7D32;  /* Verde Supermercado */
-    --verde-hover: #1B5E20;     /* Verde más oscuro para botones */
-    --naranja-ahorro: #FF8F00;  /* Naranja para ofertas y botones */
-    --naranja-hover: #E68000;
-    --blanco: #ffffff;
-    --gris-fondo: #f4f4f4;
-    --sombra: 0 4px 10px rgba(0,0,0,0.1);
+    --verde:          #2E7D32;
+    --verde-hover:    #1B5E20;
+    --verde-claro:    #f1f8e9;
+    --naranja:        #FF8F00;
+    --naranja-hover:  #E68000;
+    --blanco:         #ffffff;
+    --gris-fondo:     #f4f4f4;
+    --gris-texto:     #333333;
+    --rojo-error:     #e53935;
+    --sombra:         0 4px 10px rgba(0,0,0,0.1);
+    --sombra-hover:   0 10px 20px rgba(0,0,0,0.15);
+    --radio:          10px;
+    --transicion:     0.3s ease;
 }
 
 * {
@@ -18,13 +31,25 @@
 
 body {
     background-color: var(--gris-fondo);
-    color: #333;
+    color: var(--gris-texto);
     line-height: 1.6;
 }
 
-/* 2. ENCABEZADO (HEADER) - REQUERIMIENTO 3.1 */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   2. HEADER Y NAVEGACIÓN
+   ───────────────────────────────────────────────────────────── */
 header {
-    background-color: var(--verde-primario);
+    background-color: var(--verde);
     color: var(--blanco);
     padding: 15px 5%;
     display: flex;
@@ -41,6 +66,12 @@ header h1 {
     letter-spacing: 1px;
 }
 
+nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
 nav ul {
     list-style: none;
     display: flex;
@@ -49,35 +80,249 @@ nav ul {
 
 nav a {
     color: var(--blanco);
-    text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s;
+    transition: color var(--transicion);
 }
 
 nav a:hover {
-    color: var(--naranja-ahorro);
+    color: var(--naranja);
 }
 
-/* 3. BOTONES CON EFECTO HOVER - REQUERIMIENTO 3.1 */
-.btn-agregar {
-    background-color: var(--naranja-ahorro);
+/* ─────────────────────────────────────────────────────────────
+   3. BOTÓN DEL CARRITO EN EL MENÚ
+   ───────────────────────────────────────────────────────────── */
+#btn-carrito {
+    background: var(--naranja);
+    color: var(--blanco);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background var(--transicion);
+    position: relative;
+}
+
+#btn-carrito:hover {
+    background: var(--naranja-hover);
+}
+
+/* Badge contador del carrito */
+#carrito-contador {
+    background: var(--rojo-error);
+    color: white;
+    border-radius: 50%;
+    padding: 1px 6px;
+    font-size: 0.75rem;
+    margin-left: 4px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   4. PANEL LATERAL DEL CARRITO (Persona 2)
+   ───────────────────────────────────────────────────────────── */
+#carrito-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 360px;
+    height: 100vh;
+    background: var(--blanco);
+    box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    padding: 24px;
+    z-index: 2000;
+    transform: translateX(100%);
+    transition: transform var(--transicion);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+}
+
+/* Panel visible cuando tiene la clase .abierto */
+#carrito-panel.abierto {
+    transform: translateX(0);
+}
+
+#carrito-panel h3 {
+    color: var(--verde);
+    font-size: 1.3rem;
+    border-bottom: 2px solid var(--naranja);
+    padding-bottom: 10px;
+}
+
+/* Botón cerrar carrito */
+#btn-cerrar-carrito {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--gris-texto);
+    align-self: flex-end;
+    transition: color var(--transicion);
+}
+
+#btn-cerrar-carrito:hover {
+    color: var(--rojo-error);
+}
+
+/* Cada item dentro del carrito */
+.carrito-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.carrito-item-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.carrito-item-info {
+    flex: 1;
+}
+
+.carrito-item-nombre {
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.carrito-item-precio {
+    color: var(--verde);
+    font-size: 0.85rem;
+}
+
+/* Botones + y - de cantidad */
+.carrito-item-controles {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-cantidad {
+    background: var(--gris-fondo);
+    border: 1px solid #ccc;
+    width: 26px;
+    height: 26px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background var(--transicion);
+}
+
+.btn-cantidad:hover {
+    background: var(--verde-claro);
+}
+
+.carrito-item-cantidad {
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Subtotal y botón eliminar */
+.carrito-item-subtotal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--verde);
+}
+
+.btn-eliminar {
+    background: none;
+    border: none;
+    color: var(--rojo-error);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: opacity var(--transicion);
+}
+
+.btn-eliminar:hover {
+    opacity: 0.7;
+}
+
+/* Mensaje carrito vacío */
+.carrito-vacio {
+    text-align: center;
+    color: #999;
+    margin-top: 20px;
+}
+
+/* Total y botones del panel */
+#carrito-panel p {
+    font-weight: bold;
+    text-align: right;
+    font-size: 1.1rem;
+}
+
+#btn-vaciar-carrito {
+    background: none;
+    border: 1px solid var(--rojo-error);
+    color: var(--rojo-error);
+    padding: 8px;
+    border-radius: var(--radio);
+    cursor: pointer;
+    font-weight: bold;
+    transition: all var(--transicion);
+}
+
+#btn-vaciar-carrito:hover {
+    background: var(--rojo-error);
+    color: white;
+}
+
+#btn-ir-pagar {
+    background: var(--verde);
     color: white;
     border: none;
     padding: 12px;
     width: 100%;
-    border-radius: 6px;
+    border-radius: var(--radio);
     font-weight: bold;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease; /* Transición suave */
+    transition: background var(--transicion);
 }
 
-.btn-agregar:hover {
-    background-color: var(--naranja-hover);
-    transform: scale(1.03); /* Efecto de crecimiento */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+#btn-ir-pagar:hover {
+    background: var(--verde-hover);
 }
 
-/* 4. TARJETAS DE PRODUCTOS - REQUERIMIENTO 3.1 */
+/* ─────────────────────────────────────────────────────────────
+   5. NOTIFICACIÓN FLOTANTE (Persona 2)
+   ───────────────────────────────────────────────────────────── */
+#notificacion {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--verde);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transicion);
+    z-index: 3000;
+}
+
+#notificacion.visible {
+    opacity: 1;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   6. TARJETAS DE PRODUCTOS
+   ───────────────────────────────────────────────────────────── */
 .grid-productos {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -93,13 +338,15 @@ nav a:hover {
     border-radius: 12px;
     text-align: center;
     box-shadow: var(--sombra);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones requeridas */
+    transition: transform var(--transicion), box-shadow var(--transicion);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-/* Efecto hover en tarjetas */
 .tarjeta-producto:hover {
-    transform: translateY(-10px); /* La tarjeta sube un poco */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    transform: translateY(-8px);
+    box-shadow: var(--sombra-hover);
 }
 
 .tarjeta-producto img {
@@ -107,30 +354,264 @@ nav a:hover {
     height: 160px;
     object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 15px;
     background-color: #eee;
 }
 
-.precio {
-    color: var(--verde-primario);
-    font-size: 1.4rem;
-    font-weight: bold;
-    margin: 10px 0;
+.tarjeta-producto h3 {
+    font-size: 1rem;
+    color: var(--gris-texto);
 }
 
-/* 5. TABLA DE VENTAS (ADMIN) */
+.categoria-label {
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.precio {
+    color: var(--verde);
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   7. BOTONES GENERALES
+   ───────────────────────────────────────────────────────────── */
+.btn-agregar {
+    background-color: var(--naranja);
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    width: 100%;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all var(--transicion);
+    margin-top: auto;
+}
+
+.btn-agregar:hover {
+    background-color: var(--naranja-hover);
+    transform: scale(1.03);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ─────────────────────────────────────────────────────────────
+   8. FILTROS DE PRODUCTOS (Persona 2)
+   ───────────────────────────────────────────────────────────── */
+.filtros-container {
+    background: var(--blanco);
+    padding: 20px;
+    margin: 20px 5%;
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+#buscador {
+    padding: 8px 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    width: 220px;
+    outline: none;
+    transition: border var(--transicion);
+}
+
+#buscador:focus {
+    border-color: var(--verde);
+}
+
+/* Botones de categoría */
+.btn-categoria {
+    background: var(--gris-fondo);
+    border: 1px solid #ccc;
+    padding: 7px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: all var(--transicion);
+    color: var(--gris-texto);
+}
+
+.btn-categoria:hover {
+    background: var(--verde-claro);
+    border-color: var(--verde);
+    color: var(--verde);
+}
+
+.btn-categoria.activo {
+    background: var(--verde);
+    color: white;
+    border-color: var(--verde);
+}
+
+/* Filtro de precio */
+.filtro-precio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filtro-precio label {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--gris-texto);
+}
+
+.filtro-precio input {
+    width: 90px;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border var(--transicion);
+}
+
+.filtro-precio input:focus {
+    border-color: var(--verde);
+}
+
+/* Botón resetear filtros */
+#btn-resetear-filtros {
+    background: none;
+    border: 1px solid var(--naranja);
+    color: var(--naranja);
+    padding: 7px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+    transition: all var(--transicion);
+}
+
+#btn-resetear-filtros:hover {
+    background: var(--naranja);
+    color: white;
+}
+
+/* Mensaje sin resultados */
+#sin-resultados {
+    width: 100%;
+    text-align: center;
+    color: var(--rojo-error);
+    font-weight: bold;
+    padding: 10px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   9. FORMULARIOS (registro.html)
+   ───────────────────────────────────────────────────────────── */
+.form-container {
+    max-width: 500px;
+    margin: 40px auto;
+    background: var(--blanco);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+}
+
+.form-container h2 {
+    text-align: center;
+    color: var(--verde);
+    margin-bottom: 24px;
+}
+
+.form-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 18px;
+    position: relative;
+}
+
+.form-grupo label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--gris-texto);
+}
+
+.form-grupo input {
+    padding: 10px 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border var(--transicion);
+}
+
+.form-grupo input:focus {
+    border-color: var(--verde);
+}
+
+/* Clases de error que usa la Persona 2 en validaciones.js */
+.input-error {
+    border-color: var(--rojo-error) !important;
+}
+
+.error-msg {
+    color: var(--rojo-error);
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 2px;
+}
+
+/* Mensaje de éxito tras registro */
+#mensaje-exito {
+    background: var(--verde-claro);
+    color: var(--verde);
+    border: 1px solid var(--verde);
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Indicador de fortaleza de contraseña */
+.fortaleza-container {
+    height: 6px;
+    background: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+#fortaleza-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 3px;
+    transition: width 0.4s ease, background 0.4s ease;
+}
+
+#fortaleza-texto {
+    font-size: 0.78rem;
+    font-weight: bold;
+    margin-top: 2px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   10. TABLA DE VENTAS (ventas.html - Admin)
+   ───────────────────────────────────────────────────────────── */
 table {
     width: 90%;
     margin: 30px auto;
     border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
+    background: var(--blanco);
+    border-radius: var(--radio);
     overflow: hidden;
     box-shadow: var(--sombra);
 }
 
 th {
-    background-color: var(--verde-primario);
+    background-color: var(--verde);
     color: white;
     padding: 15px;
     text-align: center;
@@ -142,35 +623,84 @@ td {
     text-align: center;
 }
 
-tr:hover {
-    background-color: #f1f8e9; /* Resaltado al pasar el mouse */
+tr:hover td {
+    background-color: var(--verde-claro);
 }
 
-/* 6. DISEÑO RESPONSIVO (MÓVILES Y TABLETS) - ARREGLO PARA QUE NO SE ENCIMEN */
+/* ─────────────────────────────────────────────────────────────
+   11. FOOTER
+   ───────────────────────────────────────────────────────────── */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   12. RESPONSIVO
+   ───────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-    /* El encabezado se vuelve vertical */
+
     header {
         flex-direction: column;
         padding: 15px;
         text-align: center;
-    }
-    nav ul {
-        margin-top: 15px;
         gap: 10px;
-        flex-wrap: wrap; /* Permite que el menú baje si no cabe */
-        justify-content: center;
     }
 
-    /* ¡ESTA ES LA PARTE CLAVE! */
+    nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
     .grid-productos {
-        /* Cambiamos a 1 sola columna en celulares */
-        grid-template-columns: 1fr !important; 
-        gap: 20px; /* Espacio vertical entre tarjetas */
+        grid-template-columns: 1fr;
         padding: 10px 5%;
     }
 
-    .tarjeta-producto {
-        width: 100%; /* Ocupa todo el ancho disponible */
-        margin-bottom: 10px; /* Margen inferior extra por seguridad */
+    /* Panel del carrito ocupa toda la pantalla en móvil */
+    #carrito-panel {
+        width: 100%;
+    }
+
+    .filtros-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #buscador {
+        width: 100%;
+    }
+
+    .form-container {
+        margin: 20px;
+        padding: 24px;
+    }
+
+    table {
+        width: 100%;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.2rem;
+    }
+
+    .precio {
+        font-size: 1.1rem;
+    }
+
+    #carrito-panel {
+        padding: 16px;
     }
 }

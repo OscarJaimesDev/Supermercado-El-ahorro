@@ -2,10 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supermercado El Ahorro - Inicio</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <header>
         <div class="logo-container">
             <h1>Supermercado El Ahorro</h1>
@@ -15,10 +17,29 @@
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="productos.html">Productos</a></li>
                 <li><a href="registro.html">Registro</a></li>
-                <li><a href="ventas.html">Ventas (Admin)</a></li>
+                <li><a href="ventas.html">Ventas</a></li>
             </ul>
+            <!-- Botón del carrito con contador -->
+            <button id="btn-carrito">
+                🛒 <span id="carrito-contador" style="display:none">0</span>
+            </button>
         </nav>
     </header>
+
+    <!-- Panel lateral del carrito -->
+    <div id="carrito-panel">
+        <button id="btn-cerrar-carrito">✕ Cerrar</button>
+        <h3>Tu carrito</h3>
+        <div id="carrito-lista"></div>
+        <p>Total: <span id="carrito-total">$0.00</span></p>
+        <button id="btn-vaciar-carrito">Vaciar carrito</button>
+        <a href="ventas.html">
+            <button id="btn-ir-pagar">Ir a pagar</button>
+        </a>
+    </div>
+
+    <!-- Notificación flotante -->
+    <div id="notificacion"></div>
 
     <main>
         <section style="text-align:center; padding: 40px 10%;">
@@ -26,55 +47,89 @@
             <p>Lo mejor en frescura para tu hogar.</p>
         </section>
 
-        <section style="background:#fff; padding:30px; margin: 0 10% 40px; border-radius:15px; border:2px dashed var(--verde); text-align: center;">
+        <section style="background:#fff; padding:30px; margin: 0 10% 40px; border-radius:15px; border:2px dashed var(--verde); text-align:center;">
             <h3>¿Quieres ver ofertas exclusivas?</h3>
             <p>Regístrate para desbloquear el carrusel de descuentos especiales.</p>
-            <a href="registro.html" class="btn-agregar" style="text-decoration:none; display:inline-block; width:auto; padding:10px 30px; margin-top:10px;">Crear mi Cuenta</a>
+            <a href="registro.html" class="btn-agregar" style="text-decoration:none; display:inline-block; width:auto; padding:10px 30px; margin-top:10px;">
+                Crear mi Cuenta
+            </a>
         </section>
 
         <section style="padding: 20px 5%;">
             <h2 style="text-align:center; color:var(--verde); margin-bottom:30px;">Explora nuestras Categorías</h2>
-            
+
             <div class="grid-productos">
-                <article class="tarjeta-producto">
-                    <p style="font-size: 10px; color: #888;">CATEGORÍA: FRUTAS</p>
-                    <img src="images/productos/manzana.jpg" alt="Manzana">
+
+                <article class="tarjeta-producto"
+                    data-categoria="frutas"
+                    data-precio="3.50"
+                    data-nombre="manzana roja">
+                    <p style="font-size:10px; color:#888;">CATEGORÍA: FRUTAS</p>
+                    <img src="images/manzana.jpg" alt="Manzana">
                     <h3>Manzana Roja</h3>
                     <p class="precio">$3.50</p>
-                    <button class="btn-agregar" onclick="location.href='productos.html'">Ver en Catálogo</button>
+                    <button class="btn-agregar"
+                        onclick="agregarAlCarrito(1, 'Manzana Roja', 3.50, 'images/productos/manzana.jpg')">
+                        Agregar al carrito
+                    </button>
                 </article>
 
-                <article class="tarjeta-producto">
-                    <p style="font-size: 10px; color: #888;">CATEGORÍA: VERDURAS</p>
-                    <img src="images/productos/zanahoria.jpg" alt="Zanahoria">
+                <article class="tarjeta-producto"
+                    data-categoria="verduras"
+                    data-precio="1.50"
+                    data-nombre="zanahoria">
+                    <p style="font-size:10px; color:#888;">CATEGORÍA: VERDURAS</p>
+                    <img src="images/zanahoria.jpg" alt="Zanahoria">
                     <h3>Zanahoria (1kg)</h3>
                     <p class="precio">$1.50</p>
-                    <button class="btn-agregar" onclick="location.href='productos.html'">Ver en Catálogo</button>
+                    <button class="btn-agregar"
+                        onclick="agregarAlCarrito(2, 'Zanahoria', 1.50, 'images/productos/zanahoria.jpg')">
+                        Agregar al carrito
+                    </button>
                 </article>
 
-                <article class="tarjeta-producto">
-                    <p style="font-size: 10px; color: #888;">CATEGORÍA: LÁCTEOS</p>
-                    <img src="images/productos/leche.jpg" alt="Leche">
+                <article class="tarjeta-producto"
+                    data-categoria="lacteos"
+                    data-precio="1.20"
+                    data-nombre="leche entera">
+                    <p style="font-size:10px; color:#888;">CATEGORÍA: LÁCTEOS</p>
+                    <img src="images/leche.jpg" alt="Leche">
                     <h3>Leche Entera</h3>
                     <p class="precio">$1.20</p>
-                    <button class="btn-agregar" onclick="location.href='productos.html'">Ver en Catálogo</button>
+                    <button class="btn-agregar"
+                        onclick="agregarAlCarrito(3, 'Leche Entera', 1.20, 'images/productos/leche.jpg')">
+                        Agregar al carrito
+                    </button>
                 </article>
 
-                <article class="tarjeta-producto">
-                    <p style="font-size: 10px; color: #888;">CATEGORÍA: BEBIDAS</p>
-                    <img src="images/productos/jugo.jpg" alt="Jugo">
+                <article class="tarjeta-producto"
+                    data-categoria="bebidas"
+                    data-precio="4.00"
+                    data-nombre="jugo de naranja">
+                    <p style="font-size:10px; color:#888;">CATEGORÍA: BEBIDAS</p>
+                    <img src="images/jugo.jfif" alt="Jugo">
                     <h3>Jugo de Naranja</h3>
                     <p class="precio">$4.00</p>
-                    <button class="btn-agregar" onclick="location.href='productos.html'">Ver en Catálogo</button>
+                    <button class="btn-agregar"
+                        onclick="agregarAlCarrito(4, 'Jugo de Naranja', 4.00, 'images/productos/jugo.jpg')">
+                        Agregar al carrito
+                    </button>
                 </article>
 
-                <article class="tarjeta-producto">
-                    <p style="font-size: 10px; color: #888;">CATEGORÍA: LIMPIEZA</p>
-                    <img src="images/productos/detergente.jpg" alt="Detergente">
-                    <h3>Detergente</h3>
+                <article class="tarjeta-producto"
+                    data-categoria="granos"
+                    data-precio="8.50"
+                    data-nombre="arroz">
+                    <p style="font-size:10px; color:#888;">CATEGORÍA: GRANOS</p>
+                    <img src="images/arroz.jpg" alt="Arroz">
+                    <h3>Arroz 1kg</h3>
                     <p class="precio">$8.50</p>
-                    <button class="btn-agregar" onclick="location.href='productos.html'">Ver en Catálogo</button>
+                    <button class="btn-agregar"
+                        onclick="agregarAlCarrito(5, 'Arroz 1kg', 8.50, 'images/productos/arroz.jpg')">
+                        Agregar al carrito
+                    </button>
                 </article>
+
             </div>
         </section>
     </main>
@@ -82,5 +137,10 @@
     <footer style="background:#333; color:white; text-align:center; padding:20px; margin-top:40px;">
         <p>&copy; 2026 Supermercado El Ahorro</p>
     </footer>
+
+    <!-- Scripts al final del body, en este orden -->
+    <script src="js/carrito.js"></script>
+    <script src="js/scripts.js"></script>
+
 </body>
 </html>
