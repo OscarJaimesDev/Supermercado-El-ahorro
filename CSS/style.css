@@ -104,6 +104,25 @@ nav a:hover {
     position: relative;
 }
 
+/* Botón iniciar/cerrar sesión en el menú */
+#btn-sesion {
+    background: transparent;
+    color: var(--blanco);
+    border: 2px solid var(--blanco);
+    padding: 7px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all var(--transicion);
+    white-space: nowrap;
+}
+
+#btn-sesion:hover {
+    background: var(--blanco);
+    color: var(--verde);
+}
+
 #btn-carrito:hover {
     background: var(--naranja-hover);
 }

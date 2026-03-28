@@ -20,7 +20,7 @@
         <li><a href="productos.html">Productos</a></li>
         <li id="link-registro"><a href="registro.html">Registro</a></li>
         <li id="link-ventas" style="display:none">
-            <a href="ventas.php">Ventas</a>
+            <a href="admin.php">Ventas</a>
         </li>
             </ul>
             <button id="btn-sesion">Iniciar sesión</button>
@@ -39,9 +39,7 @@
         <div id="carrito-lista"></div>
         <p>Total: <span id="carrito-total">$0.00</span></p>
         <button id="btn-vaciar-carrito">Vaciar carrito</button>
-        <a href="ventas.html">
-            <button id="btn-ir-pagar">Ir a pagar</button>
-        </a>
+        <button id="btn-ir-pagar" onclick="confirmarVenta()">Ir a pagar</button>
     </div>
 
     <!-- Notificación flotante -->

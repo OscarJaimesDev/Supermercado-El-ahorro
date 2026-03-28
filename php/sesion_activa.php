@@ -17,4 +17,4 @@ if (isset($_SESSION['id_usuario'])) {
 } else {
     echo json_encode(['activa' => false]);
 }
-?>
+?>  

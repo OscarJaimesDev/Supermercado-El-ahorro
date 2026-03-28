@@ -49,6 +49,7 @@ function agregarAlCarrito(id, nombre, precio, imagen) {
     });
   }
 
+  guardarCarritoLocal();
   actualizarVistaCarrito();
   mostrarNotificacion(`"${nombre}" agregado al carrito.`);
 }
@@ -64,6 +65,7 @@ function agregarAlCarrito(id, nombre, precio, imagen) {
 function eliminarDelCarrito(id) {
   // Filtrar el array dejando solo los productos que NO sean el eliminado
   carrito = carrito.filter(item => item.id_producto !== id);
+  guardarCarritoLocal();
   actualizarVistaCarrito();
 }
 
@@ -109,6 +111,8 @@ function vaciarCarrito() {
   if (!confirmar) return;
 
   carrito = [];
+  guardarCarritoLocal();
+  limpiarCarritoLocal();
   actualizarVistaCarrito();
 }
 
@@ -297,27 +301,79 @@ function obtenerCarritoParaPHP() {
 }
 
 // ─────────────────────────────────────────────────────────────
-//  INICIALIZACIÓN DEL CARRITO
-//  Se agrega dentro del DOMContentLoaded que ya existe.
+//  CONFIRMAR Y ENVIAR VENTA AL PHP
+//  Pide confirmación al usuario, luego envía el carrito a
+//  guardar_venta.php mediante fetch (POST con JSON).
 // ─────────────────────────────────────────────────────────────
 
-// Dentro del document.addEventListener("DOMContentLoaded") que
-// ya tienes al final del archivo, agregar estas líneas:
-//
-//   const btnAbrirCarrito = document.getElementById("btn-carrito");
-//   if (btnAbrirCarrito) {
-//     btnAbrirCarrito.addEventListener("click", abrirCarrito);
-//   }
-//
-//   const btnCerrarCarrito = document.getElementById("btn-cerrar-carrito");
-//   if (btnCerrarCarrito) {
-//     btnCerrarCarrito.addEventListener("click", cerrarCarrito);
-//   }
-//
-//   const btnVaciar = document.getElementById("btn-vaciar-carrito");
-//   if (btnVaciar) {
-//     btnVaciar.addEventListener("click", vaciarCarrito);
-//   }
-//
-//   // Inicializar la vista del carrito vacío al cargar la página
-//   actualizarVistaCarrito();
+/**
+ * Muestra un resumen de la venta, pide confirmación y,
+ * si el usuario acepta, envía el carrito al servidor.
+ */
+async function confirmarVenta() {
+  if (carrito.length === 0) {
+    alert("Tu carrito está vacío. Agrega productos antes de pagar.");
+    return;
+  }
+
+  const total    = formatearPrecio(calcularTotalPrecio());
+  const cantidad = calcularTotalItems();
+  const confirmar = confirm(
+    `¿Confirmas tu compra?\n\n` +
+    `Productos: ${cantidad} item(s)\n` +
+    `Total: ${total}\n\n` +
+    `Presiona Aceptar para registrar la venta.`
+  );
+
+  if (!confirmar) return;
+
+  // Deshabilitar el botón mientras se procesa
+  const btnPagar = document.getElementById("btn-ir-pagar");
+  if (btnPagar) {
+    btnPagar.disabled    = true;
+    btnPagar.textContent = "Procesando...";
+  }
+
+  try {
+    const datos = new FormData();
+    datos.append("carrito", obtenerCarritoParaPHP());
+
+    const resp      = await fetch("php/guardar_venta.php", { method: "POST", body: datos });
+    const resultado = await resp.json();
+
+    if (resultado.exito) {
+      carrito = [];
+      actualizarVistaCarrito();
+      cerrarCarrito();
+      mostrarNotificacion(`✅ ¡Venta registrada! Total: ${formatearPrecio(resultado.total)}`);
+    } else {
+      alert("Error al registrar la venta: " + resultado.mensaje);
+    }
+
+  } catch (err) {
+    alert("Error de conexión. Intenta de nuevo.");
+  } finally {
+    if (btnPagar) {
+      btnPagar.disabled    = false;
+      btnPagar.textContent = "Ir a pagar";
+    }
+  }
+}
+// ─────────────────────────────────────────────────────────────
+//  PERSISTENCIA CON localStorage
+// ─────────────────────────────────────────────────────────────
+
+const CARRITO_KEY = "supermercado_carrito";
+
+function guardarCarritoLocal() {
+  localStorage.setItem(CARRITO_KEY, JSON.stringify(carrito));
+}
+
+function cargarCarritoLocal() {
+  const datos = localStorage.getItem(CARRITO_KEY);
+  return datos ? JSON.parse(datos) : [];
+}
+
+function limpiarCarritoLocal() {
+  localStorage.removeItem(CARRITO_KEY);
+}

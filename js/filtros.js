@@ -77,7 +77,7 @@ function filtrarPorPrecio(precioMin, precioMax) {
  * Una tarjeta solo es visible si cumple AMBAS condiciones.
  */
 function aplicarFiltrosCombinados() {
-  const tarjetas = document.querySelectorAll(".producto-card");
+  const tarjetas = document.querySelectorAll(".tarjeta-producto");
 
   // Leer la categoría activa
   const btnActivo   = document.querySelector(".btn-categoria.activo");
