@@ -190,7 +190,9 @@ UPDATE usuarios SET rol = 'administrador' WHERE email = 'tu@email.com';
 
 ## Autores
 
-Proyecto desarrollado en equipo como trabajo final de la materia.
+JOSE SEGOVIA
+DIANA HERNANDEZ
+OSCAR JAIMES
 
 ---
 
