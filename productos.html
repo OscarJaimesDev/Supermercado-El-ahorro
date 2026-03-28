@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo Completo - El Ahorro</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
     <header>
@@ -14,12 +16,11 @@
         </div>
         <nav>
             <ul>
-                  <li><a href="index.html">Inicio</a></li>
-        <li><a href="productos.html">Productos</a></li>
-        <li id="link-registro"><a href="registro.html">Registro</a></li>
-        <li id="link-ventas" style="display:none">
-            <a href="admin.php">Ventas</a>
-        </li>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+                <li id="link-ventas" style="display:none">
+                    <a href="admin.php">Ventas</a>
+                </li>
             </ul>
             <button id="btn-sesion">Iniciar sesión</button>
             <button id="btn-carrito">
@@ -36,8 +37,8 @@
         <div id="carrito-lista"></div>
         <p>Total: <span id="carrito-total">$0.00</span></p>
         <button id="btn-vaciar-carrito">Vaciar carrito</button>
-        
-            <button id="btn-ir-pagar">Ir a pagar</button>
+
+        <button id="btn-ir-pagar">Ir a pagar</button>
         </a>
     </div>
 
@@ -83,8 +84,7 @@
         <div class="grid-productos">
 
             <!-- FRUTAS -->
-            <article class="tarjeta-producto"
-                data-categoria="frutas" data-precio="3.50" data-nombre="manzana roja">
+            <article class="tarjeta-producto" data-categoria="frutas" data-precio="3.50" data-nombre="manzana roja">
                 <p class="categoria-label">FRUTAS</p>
                 <img src="images/Productos/manzana.jpg" alt="Manzana Roja">
                 <h3>Manzana Roja</h3>
@@ -95,8 +95,7 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="frutas" data-precio="2.50" data-nombre="banano">
+            <article class="tarjeta-producto" data-categoria="frutas" data-precio="2.50" data-nombre="banano">
                 <p class="categoria-label">FRUTAS</p>
                 <img src="images/Productos/banano.jpg" alt="Banano">
                 <h3>Banano (1kg)</h3>
@@ -107,8 +106,7 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="frutas" data-precio="4.00" data-nombre="uvas verdes">
+            <article class="tarjeta-producto" data-categoria="frutas" data-precio="4.00" data-nombre="uvas verdes">
                 <p class="categoria-label">FRUTAS</p>
                 <img src="images/Productos/uvas.jpg" alt="Uvas Verdes">
                 <h3>Uvas Verdes</h3>
@@ -119,8 +117,7 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="frutas" data-precio="5.50" data-nombre="fresas">
+            <article class="tarjeta-producto" data-categoria="frutas" data-precio="5.50" data-nombre="fresas">
                 <p class="categoria-label">FRUTAS</p>
                 <img src="images/Productos/fresas.jpg" alt="Fresas">
                 <h3>Fresas (500g)</h3>
@@ -132,8 +129,7 @@
             </article>
 
             <!-- VERDURAS -->
-            <article class="tarjeta-producto"
-                data-categoria="verduras" data-precio="1.50" data-nombre="zanahoria">
+            <article class="tarjeta-producto" data-categoria="verduras" data-precio="1.50" data-nombre="zanahoria">
                 <p class="categoria-label">VERDURAS</p>
                 <img src="images/Productos/zanahoria.jpg" alt="Zanahoria">
                 <h3>Zanahoria</h3>
@@ -144,8 +140,8 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="verduras" data-precio="2.20" data-nombre="cebolla cabezona">
+            <article class="tarjeta-producto" data-categoria="verduras" data-precio="2.20"
+                data-nombre="cebolla cabezona">
                 <p class="categoria-label">VERDURAS</p>
                 <img src="images/Productos/cebolla.jpg" alt="Cebolla">
                 <h3>Cebolla Cabezona</h3>
@@ -156,8 +152,7 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="verduras" data-precio="3.00" data-nombre="tomate chonto">
+            <article class="tarjeta-producto" data-categoria="verduras" data-precio="3.00" data-nombre="tomate chonto">
                 <p class="categoria-label">VERDURAS</p>
                 <img src="images/Productos/tomate.jpg" alt="Tomate">
                 <h3>Tomate Chonto</h3>
@@ -168,8 +163,7 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="verduras" data-precio="2.80" data-nombre="papa sabanera">
+            <article class="tarjeta-producto" data-categoria="verduras" data-precio="2.80" data-nombre="papa sabanera">
                 <p class="categoria-label">VERDURAS</p>
                 <img src="images/Productos/papa.jpg" alt="Papa">
                 <h3>Papa Sabanera</h3>
@@ -181,8 +175,7 @@
             </article>
 
             <!-- LÁCTEOS -->
-            <article class="tarjeta-producto"
-                data-categoria="lacteos" data-precio="1.20" data-nombre="leche entera">
+            <article class="tarjeta-producto" data-categoria="lacteos" data-precio="1.20" data-nombre="leche entera">
                 <p class="categoria-label">LÁCTEOS</p>
                 <img src="images/Productos/leche.jpg" alt="Leche">
                 <h3>Leche Entera</h3>
@@ -193,8 +186,7 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="lacteos" data-precio="4.50" data-nombre="queso campesino">
+            <article class="tarjeta-producto" data-categoria="lacteos" data-precio="4.50" data-nombre="queso campesino">
                 <p class="categoria-label">LÁCTEOS</p>
                 <img src="images/Productos/queso.png" alt="Queso">
                 <h3>Queso Campesino</h3>
@@ -205,8 +197,7 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="lacteos" data-precio="2.50" data-nombre="yogurt fresa">
+            <article class="tarjeta-producto" data-categoria="lacteos" data-precio="2.50" data-nombre="yogurt fresa">
                 <p class="categoria-label">LÁCTEOS</p>
                 <img src="images/Productos/yogurt.png" alt="Yogurt">
                 <h3>Yogurt Fresa</h3>
@@ -217,8 +208,7 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="lacteos" data-precio="3.80" data-nombre="mantequilla">
+            <article class="tarjeta-producto" data-categoria="lacteos" data-precio="3.80" data-nombre="mantequilla">
                 <p class="categoria-label">LÁCTEOS</p>
                 <img src="images/Productos/mantequilla.png" alt="Mantequilla">
                 <h3>Mantequilla</h3>
@@ -230,8 +220,7 @@
             </article>
 
             <!-- BEBIDAS -->
-            <article class="tarjeta-producto"
-                data-categoria="bebidas" data-precio="4.00" data-nombre="jugo naranja">
+            <article class="tarjeta-producto" data-categoria="bebidas" data-precio="4.00" data-nombre="jugo naranja">
                 <p class="categoria-label">BEBIDAS</p>
                 <img src="images/Productos/jugo.jfif" alt="Jugo">
                 <h3>Jugo Naranja</h3>
@@ -242,8 +231,7 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="bebidas" data-precio="2.50" data-nombre="gaseosa">
+            <article class="tarjeta-producto" data-categoria="bebidas" data-precio="2.50" data-nombre="gaseosa">
                 <p class="categoria-label">BEBIDAS</p>
                 <img src="images/Productos/gaseosa.png" alt="Gaseosa">
                 <h3>Gaseosa 1.5L</h3>
@@ -254,8 +242,7 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="bebidas" data-precio="1.00" data-nombre="agua mineral">
+            <article class="tarjeta-producto" data-categoria="bebidas" data-precio="1.00" data-nombre="agua mineral">
                 <p class="categoria-label">BEBIDAS</p>
                 <img src="images/Productos/agua.jfif" alt="Agua">
                 <h3>Agua Mineral</h3>
@@ -266,8 +253,8 @@
                 </button>
             </article>
 
-            <article class="tarjeta-producto"
-                data-categoria="bebidas" data-precio="6.00" data-nombre="six pack cerveza">
+            <article class="tarjeta-producto" data-categoria="bebidas" data-precio="6.00"
+                data-nombre="six pack cerveza">
                 <p class="categoria-label">BEBIDAS</p>
                 <img src="images/Productos/cerveza.jpg" alt="Cerveza">
                 <h3>Six Pack Cerveza</h3>
@@ -279,8 +266,7 @@
             </article>
 
             <!-- GRANOS -->
-            <article class="tarjeta-producto"
-                data-categoria="granos" data-precio="8.50" data-nombre="arroz">
+            <article class="tarjeta-producto" data-categoria="granos" data-precio="8.50" data-nombre="arroz">
                 <p class="categoria-label">GRANOS</p>
                 <img src="images/Productos/arroz.jpg" alt="Arroz">
                 <h3>Arroz 1kg</h3>
@@ -304,4 +290,5 @@
     <script src="js/scripts.js"></script>
 
 </body>
+
 </html>

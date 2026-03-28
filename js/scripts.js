@@ -46,24 +46,21 @@ function verificarSesionEnMenu() {
   fetch("php/sesion_activa.php")
     .then(res => res.json())
     .then(data => {
-      const linkVentas   = document.getElementById("link-ventas");
-      const linkRegistro = document.getElementById("link-registro");
-      const btnSesion    = document.getElementById("btn-sesion");
+      const linkVentas = document.getElementById("link-ventas");
+      const btnSesion  = document.getElementById("btn-sesion");
 
       if (data.activa) {
         if (btnSesion) {
           btnSesion.textContent = "Cerrar sesión (" + data.nombre + ")";
           btnSesion.onclick = () => window.location.href = "php/logout.php";
         }
-        if (linkRegistro) linkRegistro.style.display = "none";
-        if (linkVentas)   linkVentas.style.display   = data.rol === "administrador" ? "block" : "none";
+        if (linkVentas) linkVentas.style.display = data.rol === "administrador" ? "block" : "none";
       } else {
         if (btnSesion) {
           btnSesion.textContent = "Iniciar sesión";
           btnSesion.onclick = () => window.location.href = "login.html";
         }
-        if (linkVentas)   linkVentas.style.display   = "none";
-        if (linkRegistro) linkRegistro.style.display = "block";
+        if (linkVentas) linkVentas.style.display = "none";
       }
     })
     .catch(() => {

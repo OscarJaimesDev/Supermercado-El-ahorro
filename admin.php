@@ -68,38 +68,6 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Admin - El Ahorro</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .admin-tabs        { display:flex; gap:10px; margin:30px 5% 0; }
-        .tab-btn           { padding:10px 24px; border:2px solid var(--verde); background:white;
-                             color:var(--verde); border-radius:6px 6px 0 0; font-weight:bold;
-                             cursor:pointer; font-size:0.95rem; transition:all .2s; }
-        .tab-btn.activo    { background:var(--verde); color:white; }
-        .tab-contenido     { display:none; margin:0 5% 40px;
-                             background:white; border-radius:0 6px 6px 6px;
-                             box-shadow:var(--sombra); padding:24px; }
-        .tab-contenido.activo { display:block; }
-        .msg-exito         { background:#e8f5e9; color:var(--verde); border:1px solid var(--verde);
-                             padding:12px; border-radius:6px; font-weight:bold; margin-bottom:16px; }
-        .msg-error         { background:#fdecea; color:var(--rojo-error); border:1px solid var(--rojo-error);
-                             padding:12px; border-radius:6px; font-weight:bold; margin-bottom:16px; }
-        .admin-titulo      { color:var(--verde); margin-bottom:20px; font-size:1.3rem; }
-        table              { width:100%; margin:0; border-radius:0; box-shadow:none; }
-        .btn-eliminar-venta { background:none; border:1px solid var(--rojo-error);
-                              color:var(--rojo-error); padding:5px 12px; border-radius:4px;
-                              cursor:pointer; font-size:0.8rem; font-weight:bold; transition:all .2s; }
-        .btn-eliminar-venta:hover { background:var(--rojo-error); color:white; }
-        .badge-admin       { background:var(--naranja); color:white; padding:2px 8px;
-                             border-radius:10px; font-size:0.75rem; font-weight:bold; }
-        .badge-cliente     { background:#e0e0e0; color:#555; padding:2px 8px;
-                             border-radius:10px; font-size:0.75rem; font-weight:bold; }
-        .resumen-cards     { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-                             gap:16px; margin-bottom:28px; }
-        .resumen-card      { background:var(--verde-claro); border-left:4px solid var(--verde);
-                             padding:16px 20px; border-radius:0 8px 8px 0; }
-        .resumen-card .numero { font-size:2rem; font-weight:bold; color:var(--verde); }
-        .resumen-card .label  { font-size:0.85rem; color:#555; }
-        .tabla-scroll      { overflow-x:auto; }
-    </style>
 </head>
 <body>
 
@@ -114,7 +82,7 @@ try {
             <li><a href="ofertas.php">Ofertas</a></li>
             <li><a href="admin.php" style="color:var(--naranja);">Panel Admin</a></li>
         </ul>
-        <button onclick="window.location.href='php/logout.php'">
+        <button id="btn-sesion" onclick="window.location.href='php/logout.php'">
             Cerrar sesión (<?php echo htmlspecialchars($_SESSION['nombre']); ?>)
         </button>
     </nav>

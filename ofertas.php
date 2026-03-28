@@ -14,25 +14,6 @@ if (!isset($_SESSION['id_usuario'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ofertas para Socios - El Ahorro</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .carrusel-wrapper     { position: relative; overflow: hidden; margin: 30px 5%; border-radius: 20px; }
-        .carrusel-track       { display: flex; transition: transform 0.5s ease; }
-        .oferta-slide         { min-width: 100%; padding: 60px 40px; text-align: center; color: white; }
-        .oferta-slide h2      { font-size: 2rem; margin-bottom: 16px; }
-        .oferta-badge         { font-size: 1.5rem; border: 2px solid white; padding: 16px 32px; display: inline-block; border-radius: 10px; margin: 16px 0; }
-        .oferta-slide p       { font-size: 1rem; opacity: 0.9; }
-        .slide-verde          { background: linear-gradient(to right, #2E7D32, #1B5E20); }
-        .slide-naranja        { background: linear-gradient(to right, #FF8F00, #E65100); }
-        .slide-azul           { background: linear-gradient(to right, #1565C0, #0D47A1); }
-        .carrusel-controles   { position: absolute; top: 50%; transform: translateY(-50%); width: 100%; display: flex; justify-content: space-between; padding: 0 16px; pointer-events: none; }
-        .btn-slide            { background: rgba(255,255,255,0.3); border: none; color: white; font-size: 1.5rem; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; pointer-events: all; transition: background 0.3s; }
-        .btn-slide:hover      { background: rgba(255,255,255,0.6); }
-        .carrusel-dots        { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
-        .dot                  { width: 10px; height: 10px; border-radius: 50%; background: #ccc; cursor: pointer; transition: background 0.3s; }
-        .dot.activo           { background: var(--verde); }
-        .bienvenida-banner    { background: var(--verde-claro); border-left: 4px solid var(--verde); padding: 16px 24px; margin: 0 5% 30px; border-radius: 0 8px 8px 0; }
-        .bienvenida-banner p  { color: var(--verde); font-weight: bold; font-size: 1rem; }
-    </style>
 </head>
 <body>
 
