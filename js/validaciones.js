@@ -225,7 +225,7 @@ function validarConfirmacion(campoConfirm, campoPassword) {
  * Si alguno falla, detiene el envío y muestra los errores.
  * @param {Event} evento - El evento submit del formulario.
  */
-function validarFormularioRegistro(evento) {
+async function validarFormularioRegistro(evento) {
   // Detener el envío del formulario hasta validar
   evento.preventDefault();
 
@@ -237,8 +237,7 @@ function validarFormularioRegistro(evento) {
   const password  = document.getElementById("password");
   const confirmar = document.getElementById("confirmar_password");
 
-  // Ejecutar cada validación y guardar el resultado
-  // Se evalúan TODAS (sin cortocircuito) para mostrar todos los errores a la vez
+  // Evaluar TODOS los campos (sin cortocircuito) para mostrar todos los errores a la vez
   const resultados = [
     validarNombre(nombre),
     validarApellido(apellido),
@@ -248,15 +247,36 @@ function validarFormularioRegistro(evento) {
     validarConfirmacion(confirmar, password),
   ];
 
-  // Si todos los campos son válidos, enviar el formulario
-  const formularioValido = resultados.every(r => r === true);
+  if (!resultados.every(r => r === true)) return;
 
-  if (formularioValido) {
-    // Aquí el formulario se enviará al PHP (registro.php)
-    // Por ahora mostramos un mensaje de éxito de prueba
-    mostrarMensajeExito("¡Registro exitoso! Bienvenido al supermercado.");
-    // Cuando el backend esté listo, reemplazar la línea anterior por:
-    // evento.target.submit();
+  // ── Todos los campos válidos: enviar al PHP ──
+  const btnSubmit = evento.target.querySelector("button[type='submit']");
+  if (btnSubmit) {
+    btnSubmit.disabled    = true;
+    btnSubmit.textContent = "Registrando...";
+  }
+
+  try {
+    const datos = new FormData(evento.target);
+    const resp  = await fetch("php/registro.php", { method: "POST", body: datos });
+    const resultado = await resp.json();
+
+    if (resultado.exito) {
+      mostrarMensajeExito(resultado.mensaje);
+      evento.target.reset(); // Limpiar el formulario
+      // Redirigir al login después de 2 segundos
+      setTimeout(() => { window.location.href = "login.html"; }, 2000);
+    } else {
+      mostrarMensajeError(resultado.mensaje);
+    }
+
+  } catch (err) {
+    mostrarMensajeError("Error de conexión. Intenta de nuevo.");
+  } finally {
+    if (btnSubmit) {
+      btnSubmit.disabled    = false;
+      btnSubmit.textContent = "Registrarse";
+    }
   }
 }
 
@@ -352,8 +372,30 @@ function mostrarMensajeExito(mensaje) {
   if (contenedor) {
     contenedor.textContent = mensaje;
     contenedor.style.display = "block";
-    // Ocultar el mensaje después de 4 segundos
     setTimeout(() => { contenedor.style.display = "none"; }, 4000);
+  }
+}
+
+/**
+ * Muestra un mensaje de error en pantalla cuando el PHP devuelve un fallo.
+ * Reutiliza el mismo contenedor con estilos de error.
+ * @param {string} mensaje - Texto a mostrar.
+ */
+function mostrarMensajeError(mensaje) {
+  const contenedor = document.getElementById("mensaje-exito");
+  if (contenedor) {
+    contenedor.textContent    = mensaje;
+    contenedor.style.display  = "block";
+    contenedor.style.background = "#fdecea";
+    contenedor.style.color      = "#e53935";
+    contenedor.style.borderColor = "#e53935";
+    setTimeout(() => {
+      contenedor.style.display = "none";
+      // Restaurar estilos de éxito para la próxima vez
+      contenedor.style.background  = "";
+      contenedor.style.color       = "";
+      contenedor.style.borderColor = "";
+    }, 4000);
   }
 }
 

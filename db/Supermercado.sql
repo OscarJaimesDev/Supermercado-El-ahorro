@@ -19,7 +19,7 @@ USE `supermercado`;
 
 --
 -- Table structure for table `productos`
---
+--    
 
 DROP TABLE IF EXISTS `productos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -57,6 +57,7 @@ CREATE TABLE `usuarios` (
   `email` varchar(150) NOT NULL,
   `telefono` varchar(20) DEFAULT NULL,
   `contrasena` varchar(255) NOT NULL,
+  `rol` varchar(20) NOT NULL DEFAULT 'cliente',
   `fecha_registro` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `email` (`email`)

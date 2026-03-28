@@ -1,35 +1,206 @@
+<?php
+// Verificar que haya sesión activa (cualquier usuario registrado)
+session_start();
+
+if (!isset($_SESSION['id_usuario'])) {
+    header('Location: login.html');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Bienvenido Socio - El Ahorro</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas para Socios - El Ahorro</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <header>
-        <h1>Supermercado El Ahorro</h1>
+        <div class="logo-container">
+            <h1>Supermercado El Ahorro</h1>
+        </div>
         <nav>
             <ul>
-                <li><a href="ofertas.html">Inicio</a></li>
+                <li><a href="index.html">Inicio</a></li>
                 <li><a href="productos.html">Productos</a></li>
-                <li><a href="index.html">Cerrar Sesión</a></li>
-                <li><a href="ventas.html">Ventas</a></li>
+                <li><a href="ofertas.php">Ofertas</a></li>
+                <li id="link-ventas" style="display:none">
+                    <a href="admin.php">Ventas (Admin)</a>
+                </li>
             </ul>
+            <button id="btn-sesion">Cerrar sesión</button>
+            <button id="btn-carrito">
+                <img src="images/cart.png" alt="Carrito" width="24">
+                <span id="carrito-contador" style="display:none">0</span>
+            </button>
         </nav>
     </header>
 
-    <section class="carrusel-ofertas" style="background: linear-gradient(to right, #2E7D32, #FF8F00); color:white; padding:60px; text-align:center; margin:20px 5%; border-radius:20px;">
-        <h2 style="font-size: 32px;">🔥 ¡OFERTA DE SOCIO DETECTADA! 🔥</h2>
-        <div style="font-size: 24px; margin: 20px 0; border: 2px solid white; padding: 20px; display: inline-block;">
-            20% DE DESCUENTO EN TODA LA SECCIÓN DE FRUTAS
-        </div>
-        <p>Aprovecha esta oferta solo por hoy.</p>
-    </section>
+    <div id="carrito-panel">
+        <button id="btn-cerrar-carrito">✕ Cerrar</button>
+        <h3>Tu carrito</h3>
+        <div id="carrito-lista"></div>
+        <p>Total: <span id="carrito-total">$0.00</span></p>
+        <button id="btn-vaciar-carrito">Vaciar carrito</button>
+        <button id="btn-ir-pagar" onclick="confirmarVenta()">Ir a pagar</button>
+    </div>
 
-    <main style="padding: 20px 5%;">
-        <h2>Tus Productos Favoritos</h2>
-        <div class="grid-productos">
+    <div id="notificacion"></div>
+
+    <main>
+
+        <!-- Banner de bienvenida personalizado con el nombre del usuario -->
+        <div class="bienvenida-banner">
+            <p>
+                Bienvenido, <?php echo htmlspecialchars($_SESSION['nombre']); ?>!
+                Estas son tus ofertas exclusivas como socio registrado.
+            </p>
+        </div>
+
+        <!-- ── CARRUSEL DE OFERTAS ── -->
+        <div class="carrusel-wrapper">
+            <div class="carrusel-track" id="carrusel-track">
+
+                <div class="oferta-slide slide-verde">
+                    <h2>Oferta de la semana</h2>
+                    <div class="oferta-badge">20% DE DESCUENTO EN FRUTAS</div>
+                    <p>Solo para socios registrados. Valido hasta el viernes.</p>
+                </div>
+
+                <div class="oferta-slide slide-naranja">
+                    <h2>Oferta especial</h2>
+                    <div class="oferta-badge">2x1 EN BEBIDAS SELECCIONADAS</div>
+                    <p>Lleva dos y paga uno. Stock limitado.</p>
+                </div>
+
+                <div class="oferta-slide slide-azul">
+                    <h2>Solo hoy</h2>
+                    <div class="oferta-badge">15% MENOS EN LÁCTEOS</div>
+                    <p>Aprovecha mientras dure el inventario.</p>
+                </div>
+
             </div>
+
+            <!-- Botones anterior/siguiente -->
+            <div class="carrusel-controles">
+                <button class="btn-slide" id="btn-anterior">&#8592;</button>
+                <button class="btn-slide" id="btn-siguiente">&#8594;</button>
+            </div>
+        </div>
+
+        <!-- Puntos indicadores del carrusel -->
+        <div class="carrusel-dots" id="carrusel-dots">
+            <div class="dot activo" onclick="irASlide(0)"></div>
+            <div class="dot"       onclick="irASlide(1)"></div>
+            <div class="dot"       onclick="irASlide(2)"></div>
+        </div>
+
+        <!-- ── PRODUCTOS DESTACADOS CON DESCUENTO ── -->
+        <section style="padding: 30px 5%;">
+            <h2 style="color: var(--verde); margin-bottom: 24px;">
+                Productos en oferta esta semana
+            </h2>
+            <div class="grid-productos">
+
+                <article class="tarjeta-producto"
+                    data-categoria="frutas" data-precio="2.80" data-nombre="manzana roja">
+                    <p class="categoria-label">FRUTAS — 20% OFF</p>
+                    <img src="images/productos/manzana.jpg" alt="Manzana">
+                    <h3>Manzana Roja</h3>
+                    <p style="text-decoration:line-through; color:#999; font-size:0.9rem;">$3.50</p>
+                    <p class="precio">$2.80</p>
+                    <button class="btn-agregar"
+                        onclick="agregarAlCarrito(1, 'Manzana Roja', 2.80, 'images/productos/manzana.jpg')">
+                        Agregar al carrito
+                    </button>
+                </article>
+
+                <article class="tarjeta-producto"
+                    data-categoria="bebidas" data-precio="2.50" data-nombre="gaseosa">
+                    <p class="categoria-label">BEBIDAS — 2x1</p>
+                    <img src="images/productos/gaseosa.png" alt="Gaseosa">
+                    <h3>Gaseosa 1.5L</h3>
+                    <p class="precio">$2.50 <span style="font-size:0.8rem; color:var(--naranja);">2x1</span></p>
+                    <button class="btn-agregar"
+                        onclick="agregarAlCarrito(14, 'Gaseosa 1.5L', 2.50, 'images/productos/gaseosa.png')">
+                        Agregar al carrito
+                    </button>
+                </article>
+
+                <article class="tarjeta-producto"
+                    data-categoria="lacteos" data-precio="1.02" data-nombre="leche entera">
+                    <p class="categoria-label">LÁCTEOS — 15% OFF</p>
+                    <img src="images/productos/leche.jpg" alt="Leche">
+                    <h3>Leche Entera</h3>
+                    <p style="text-decoration:line-through; color:#999; font-size:0.9rem;">$1.20</p>
+                    <p class="precio">$1.02</p>
+                    <button class="btn-agregar"
+                        onclick="agregarAlCarrito(9, 'Leche Entera', 1.02, 'images/productos/leche.jpg')">
+                        Agregar al carrito
+                    </button>
+                </article>
+
+                <article class="tarjeta-producto"
+                    data-categoria="frutas" data-precio="2.00" data-nombre="banano">
+                    <p class="categoria-label">FRUTAS — 20% OFF</p>
+                    <img src="images/productos/banano.jpg" alt="Banano">
+                    <h3>Banano (1kg)</h3>
+                    <p style="text-decoration:line-through; color:#999; font-size:0.9rem;">$2.50</p>
+                    <p class="precio">$2.00</p>
+                    <button class="btn-agregar"
+                        onclick="agregarAlCarrito(2, 'Banano', 2.00, 'images/productos/banano.jpg')">
+                        Agregar al carrito
+                    </button>
+                </article>
+
+            </div>
+        </section>
+
     </main>
+
+    <footer>
+        <p>&copy; 2026 Supermercado El Ahorro</p>
+    </footer>
+
+    <script src="js/carrito.js"></script>
+    <script src="js/scripts.js"></script>
+    <script>
+        // ── CARRUSEL ──
+        let slideActual = 0;
+        const totalSlides = 3;
+
+        function irASlide(n) {
+            slideActual = n;
+            document.getElementById("carrusel-track").style.transform =
+                `translateX(-${slideActual * 100}%)`;
+
+            // Actualizar dots
+            document.querySelectorAll(".dot").forEach((dot, i) => {
+                dot.classList.toggle("activo", i === slideActual);
+            });
+        }
+
+        function slideAnterior() {
+            slideActual = slideActual === 0 ? totalSlides - 1 : slideActual - 1;
+            irASlide(slideActual);
+        }
+
+        function slideSiguiente() {
+            slideActual = slideActual === totalSlides - 1 ? 0 : slideActual + 1;
+            irASlide(slideActual);
+        }
+
+        document.getElementById("btn-anterior").addEventListener("click", slideAnterior);
+        document.getElementById("btn-siguiente").addEventListener("click", slideSiguiente);
+
+        // Avance automático cada 4 segundos
+        setInterval(slideSiguiente, 4000);
+
+        // Mostrar Ventas en menú si es admin (usa sesion_activa.php)
+        verificarSesionEnMenu();
+    </script>
+
 </body>
 </html>
