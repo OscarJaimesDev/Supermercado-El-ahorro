@@ -723,3 +723,16 @@ footer {
         padding: 16px;
     }
 }
+
+.logo-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.logo-img {
+    width: 80px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}

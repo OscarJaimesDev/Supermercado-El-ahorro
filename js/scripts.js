@@ -7,10 +7,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnAbrir  = document.getElementById("btn-carrito");
   const btnCerrar = document.getElementById("btn-cerrar-carrito");
   const btnVaciar = document.getElementById("btn-vaciar-carrito");
+  const btnPagar  = document.getElementById("btn-ir-pagar");
 
   if (btnAbrir)  btnAbrir.addEventListener("click", abrirCarrito);
   if (btnCerrar) btnCerrar.addEventListener("click", cerrarCarrito);
   if (btnVaciar) btnVaciar.addEventListener("click", vaciarCarrito);
+  if (btnPagar)  btnPagar.addEventListener("click", confirmarVenta); // ← enlace que faltaba
 
   actualizarVistaCarrito();
 
